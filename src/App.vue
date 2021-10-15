@@ -38,6 +38,10 @@ export default {
   height: 100%;
 }
 
+.default-layout, .dashboard {
+  height: 100%;
+}
+
 /* #nav {
   padding: 30px;
 }

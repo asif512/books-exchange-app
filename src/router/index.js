@@ -10,14 +10,14 @@ const routes = [
     name: "Home",
     component: Home,
     meta: {
-      layout: 'Default'
-    }
+      layout: "Default",
+    },
   },
   {
     path: "/Dashboard",
     name: "Dashboard",
     meta: {
-      layout: 'Dashboard'
+      layout: "Dashboard",
     },
     // route level code-splitting
     // this generates a separate chunk (dashboard.[hash].js) for this route
@@ -25,6 +25,16 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "dashbord" */ "../views/Dashboard.vue"),
   },
+  {
+    path: "/login",
+    name: "Login",
+    component: () => import("../views/Login.vue"),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () =>  import('../views/Register.vue')
+  }
 ];
 
 const router = new VueRouter({
