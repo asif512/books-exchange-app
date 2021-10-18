@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <component :is="layout">
-     <router-view />
+      <router-view />
     </component>
   </div>
 </template>
@@ -10,48 +10,39 @@
 import Dashboard from "./layout/Dashboard.vue";
 import Default from "./layout/Default.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Dashboard,
-    Default
+    Default,
   },
   data() {
     return {
-      defaultLayout: 'Default'
-    }
+      defaultLayout: "Default",
+    };
   },
   computed: {
-   layout () {
-      return this.$route.meta.layout || this.defaultLayout
-    }
-  }
-}
+    layout() {
+      return this.$route.meta.layout || this.defaultLayout;
+    },
+  },
+};
 </script>
 
 <style>
+html,
+body {
+  height: 100%;
+}
+body {
+  background: #f2f7f2;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   height: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
 }
-
-.default-layout, .dashboard {
-  height: 100%;
-}
-
-/* #nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
 </style>
