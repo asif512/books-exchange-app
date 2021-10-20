@@ -34,15 +34,18 @@ body {
   height: 100%;
 }
 body {
-  background: #f2f7f2;
+  background: #f8f9fa !important;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   height: 100%;
   max-width: 1170px;
   margin: 0 auto;
+}
+.default-layout,
+.dashboard {
+  height: 100%;
 }
 </style>

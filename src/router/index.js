@@ -25,6 +25,46 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "dashbord" */ "../views/Dashboard.vue"),
   },
+  {
+    path: "/book/:id",
+    name: "BooksDetails",
+    meta: {
+      layout: "Default",
+    },
+    component: () => import("../views/BooksDetails.vue"),
+  },
+  {
+    path: "/signin",
+    name: "Signin",
+    meta: {
+      layout: "Default",
+    },
+    component: () => import("../views/Signin.vue"),
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    meta: {
+      layout: "Default",
+    },
+    component: () => import("../views/Signup.vue"),
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    meta: {
+      layout: "Dashboard",
+    },
+    component: () => import("../views/Profile.vue"),
+  },
+  {
+    path: "/setting",
+    name: "Setting",
+    meta: {
+      layout: "Dashboard",
+    },
+    component: () => import("../views/Setting.vue"),
+  },
 ];
 
 const router = new VueRouter({
