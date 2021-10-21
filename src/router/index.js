@@ -65,6 +65,14 @@ const routes = [
     },
     component: () => import("../views/Setting.vue"),
   },
+  {
+    path: "/posts",
+    name: "PostBooks",
+    meta: {
+      layout: "Dashboard",
+    },
+    component: () => import("../views/PostBooks.vue"),
+  },
 ];
 
 const router = new VueRouter({

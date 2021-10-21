@@ -18,7 +18,7 @@
               <b-form-input
                 id="email"
                 class="mt-1"
-                v-model="user.name"
+                v-model="user.email"
                 type="email"
                 placeholder="info@gmail.com"
                 required
@@ -50,18 +50,38 @@
 </template>
 
 <script>
+import * as firebase from "firebase/app";
+import "firebase/auth";
 export default {
   name: "Signup",
   data() {
     return {
       user: {
-        username: "",
+        name: "",
+        email: "",
         password: "",
       },
     };
   },
   methods: {
-    onSubmit(event) {
+    async onSubmit(event) {
+      try {
+        const firebaseAuth = await firebase.auth();
+        const createUser = await firebaseAuth.createUserWithEmailAndPassword(
+          this.user.email,
+          this.user.password
+        );
+        console.log({ createUser });
+        // const dataBase = db.collection("users").doc(createUser.user.uid);
+        // await dataBase.set({
+        //   username: this.username,
+        //   email: this.email,
+        //   password: this.password,
+        // });
+        // this.$router.push('/');
+      } catch (error) {
+        console.log({ error });
+      }
       event.preventDefault();
       alert(JSON.stringify(this.user));
     },
