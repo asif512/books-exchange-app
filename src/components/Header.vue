@@ -10,27 +10,49 @@
       <b-navbar-nav class="ml-auto" right>
         <b-nav-item @click="redirctSigninPage">Sign in</b-nav-item>
         <b-nav-item @click="redirctSignupPage">Sign up</b-nav-item>
-        <!-- <b-nav-item-dropdown text="Lang" right>
-          <b-dropdown-item href="#">EN</b-dropdown-item>
-          <b-dropdown-item href="#">ES</b-dropdown-item>
-          <b-dropdown-item href="#">RU</b-dropdown-item>
-          <b-dropdown-item href="#">FA</b-dropdown-item>
-        </b-nav-item-dropdown>
-        <b-nav-item-dropdown right>
+        <b-nav-item-dropdown right v-if="activeUser">
           <template #button-content>
-            <em>User</em>
+            <em>{{ username }}</em>
           </template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
-        </b-nav-item-dropdown> -->
+          <b-dropdown-item href="#" @click="redirctDashboard"
+            >Dashboard</b-dropdown-item
+          >
+          <b-dropdown-item href="#" @click="handleLogout"
+            >Sign Out</b-dropdown-item
+          >
+        </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
 </template>
 <script>
+import { projectAuth } from "@/firebase/config.js";
+import { signOut } from "@firebase/auth";
+import { mapGetters, mapActions } from "vuex";
 export default {
   name: "Header",
+  computed: {
+    ...mapGetters(["activeUser"]),
+    username() {
+      return this.activeUser?.displayName;
+    },
+  },
   methods: {
+    ...mapActions(["setActiveUser"]),
+    handleLogout() {
+      signOut(projectAuth)
+        .then(() => {
+          this.setActiveUser();
+          if (location.pathname !== "/") {
+            this.$router.push("/");
+          }
+          console.log("logout..");
+        })
+        .catch((error) => console.log(error));
+    },
+    redirctDashboard() {
+      this.$router.push("/dashboard");
+    },
     redirectHomePage() {
       console.log(123);
       this.$router.push("/");

@@ -6,28 +6,28 @@
       @click="redirectPage('dashboard')"
       class="nav-item d-flex align-items-center justify-content-start px-2 py-2"
     >
-      <b-icon icon="eye-fill"></b-icon>
+      <b-icon icon="circle"></b-icon>
       <span style="margin-left: 8px">Dashbaord</span>
     </div>
     <div
       @click="redirectPage('profile')"
       class="nav-item d-flex align-items-center justify-content-start px-2 py-2"
     >
-      <b-icon icon="eye-fill"></b-icon>
+      <b-icon icon="person-check"></b-icon>
       <span style="margin-left: 8px">Profile</span>
     </div>
     <div
       @click="redirectPage('setting')"
       class="nav-item d-flex align-items-center justify-content-start px-2 py-2"
     >
-      <b-icon icon="eye-fill"></b-icon>
+      <b-icon icon="gear"></b-icon>
       <span style="margin-left: 8px">Setting</span>
     </div>
     <div
       @click="redirectPage('posts')"
       class="nav-item d-flex align-items-center justify-content-start px-2 py-2"
     >
-      <b-icon icon="eye-fill"></b-icon>
+      <b-icon icon="plus-square"></b-icon>
       <span style="margin-left: 8px">Post Books</span>
     </div>
   </div>

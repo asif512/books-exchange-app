@@ -1,6 +1,6 @@
 <template>
   <div class="post-books">
-    <app-post-book />
+    <app-post-book  title="Add Book" subTitle="POST BOOK.."/>
     <b-tabs content-class="mt-3">
       <b-tab title="Total Books" active>
         <app-total-books />

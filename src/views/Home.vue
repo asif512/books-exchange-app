@@ -22,6 +22,9 @@ import Intro from "@/components/Intro.vue";
 import BookCard from "@/components/BookCard.vue";
 import Button from "@/components/Button.vue";
 import data from "@/data/data.json";
+import { collection, getDocs } from "firebase/firestore";
+import { projectFirestore } from "@/firebase/config.js";
+
 export default {
   name: "Home",
   data() {
@@ -30,6 +33,18 @@ export default {
       books: data,
       amountShow: 20,
     };
+  },
+  async mounted() {
+    //get books
+    try {
+      const snapshoot = await getDocs(collection(projectFirestore, "books"));
+      const books = snapshoot.docs.map((doc) => {
+        return { ...doc.data(), id: doc.id };
+      });
+      console.log(books);
+    } catch (error) {
+      console.log({ error });
+    }
   },
   components: {
     "app-header": Header,

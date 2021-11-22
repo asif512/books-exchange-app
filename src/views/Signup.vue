@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import * as firebase from "firebase/app";
-import "firebase/auth";
+import { projectAuth } from "@/firebase/config.js";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 export default {
   name: "Signup",
   data() {
@@ -64,26 +64,24 @@ export default {
     };
   },
   methods: {
-    async onSubmit(event) {
-      try {
-        const firebaseAuth = await firebase.auth();
-        const createUser = await firebaseAuth.createUserWithEmailAndPassword(
-          this.user.email,
-          this.user.password
-        );
-        console.log({ createUser });
-        // const dataBase = db.collection("users").doc(createUser.user.uid);
-        // await dataBase.set({
-        //   username: this.username,
-        //   email: this.email,
-        //   password: this.password,
-        // });
-        // this.$router.push('/');
-      } catch (error) {
-        console.log({ error });
-      }
+    onSubmit(event) {
+      createUserWithEmailAndPassword(
+        projectAuth,
+        this.user.email,
+        this.user.password
+      )
+        .then((res) => {
+          updateProfile(projectAuth.currentUser, {
+            displayName: this.user.name,
+          })
+            .then(() => {
+              this.$router.push("/signin");
+            })
+            .catch((error) => console.log(error));
+          console.log({ res: res.user });
+        })
+        .catch((error) => console.log(error));
       event.preventDefault();
-      alert(JSON.stringify(this.user));
     },
     redirectSigninPage() {
       this.$router.push("/signin");

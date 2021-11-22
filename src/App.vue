@@ -9,6 +9,7 @@
 <script>
 import Dashboard from "./layout/Dashboard.vue";
 import Default from "./layout/Default.vue";
+import { mapActions } from "vuex";
 export default {
   name: "App",
   components: {
@@ -19,6 +20,12 @@ export default {
     return {
       defaultLayout: "Default",
     };
+  },
+  methods: {
+    ...mapActions(["setActiveUser"]),
+  },
+  mounted() {
+    this.setActiveUser();
   },
   computed: {
     layout() {

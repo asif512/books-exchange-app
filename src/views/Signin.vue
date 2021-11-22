@@ -3,14 +3,17 @@
     <b-row align-v="center" align-h="center" class="h-100">
       <b-col cols="10" sm="8" md="5">
         <b-card>
+          <b-alert show v-if="showMessage && showMessage !== null">{{
+            showMessage
+          }}</b-alert>
           <b-form @submit="onSubmit">
-            <b-form-group class="my-3" label="Username:" label-for="username">
+            <b-form-group class="my-3" label="User email:" label-for="email">
               <b-form-input
-                id="username"
+                id="email"
                 class="mt-1"
-                v-model="user.name"
-                type="text"
-                placeholder="Enter username"
+                v-model="user.email"
+                type="email"
+                placeholder="Enter user email"
                 required
               ></b-form-input>
             </b-form-group>
@@ -40,20 +43,37 @@
 </template>
 
 <script>
+import { projectAuth } from "@/firebase/config.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { mapActions } from "vuex";
 export default {
   name: "Signin",
   data() {
     return {
       user: {
-        username: "",
+        email: "",
         password: "",
       },
+      showMessage: null,
     };
   },
   methods: {
+    ...mapActions(["setActiveUser"]),
     onSubmit(event) {
+      signInWithEmailAndPassword(
+        projectAuth,
+        this.user.email,
+        this.user.password
+      )
+        .then(() => {
+          this.setActiveUser();
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          this.showMessage = "user not found";
+          console.log({ error });
+        });
       event.preventDefault();
-      alert(JSON.stringify(this.user));
     },
     redirctSignupPage() {
       this.$router.push("/signup");
