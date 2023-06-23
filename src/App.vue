@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Dashboard from "./layout/Dashboard.vue";
 import Default from "./layout/Default.vue";
+import Dashboard from "./layout/Dashboard.vue";
 import { mapActions } from "vuex";
 export default {
   name: "App",
